@@ -196,6 +196,10 @@ class Shipping extends Ups
             $shipToNode->appendChild($xml->createElement('EMailAddress', $shipment->getShipTo()->getEMailAddress()));
         }
 
+        if ($shipment->getShipTo()->getTaxIdentificationNumber()) {
+            $shipToNode->appendChild($xml->createElement('TaxIdentificationNumber', $shipment->getShipTo()->getTaxIdentificationNumber()));
+        }
+
         $addressNode = $shipment->getShipTo()->getAddress()->toNode($xml);
 
         if ($shipment->getShipTo()->getLocationID()) {
@@ -221,6 +225,10 @@ class Shipping extends Ups
                 $shipFromNode->appendChild($xml->createElement('FaxNumber', $shipment->getShipFrom()->getFaxNumber()));
             }
 
+            if ($shipment->getShipFrom()->getTaxIdentificationNumber()) {
+                $shipFromNode->appendChild($xml->createElement('TaxIdentificationNumber', $shipment->getShipFrom()->getTaxIdentificationNumber()));
+            }
+
             $shipFromNode->appendChild($shipment->getShipFrom()->getAddress()->toNode($xml));
         }
 
@@ -243,6 +251,11 @@ class Shipping extends Ups
 
             if ($shipment->getSoldTo()->getFaxNumber()) {
                 $soldToNode->appendChild($xml->createElement('FaxNumber', $shipment->getSoldTo()->getFaxNumber()));
+            }
+
+
+            if ($shipment->getSoldTo()->getTaxIdentificationNumber()) {
+                $soldToNode->appendChild($xml->createElement('TaxIdentificationNumber', $shipment->getSoldTo()->getTaxIdentificationNumber()));
             }
 
             if ($shipment->getSoldTo()->getAddress()) {
